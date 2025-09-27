@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Меню</h1>
+
+<form method="get" class="mb-3">
+  <div class="input-group">
+    <input type="text" name="q" value="{{ q }}" class="form-control" placeholder="Пошук...">
+    <button class="btn btn-outline-secondary">Пошук</button>
+  </div>
+</form>
+
+<div class="row">
+  {% for dish in dishes %}
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        {% if dish.image %}
+          <img src="{{ dish.image.url }}" class="card-img-top" alt="{{ dish.name }}">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ dish.name }}</h5>
+          <p class="card-text">{{ dish.description|truncatechars:100 }}</p>
+          <p><strong>{{ dish.price }} ₴</strong></p>
+          <a href="{% url 'menu:product_detail' dish.pk %}" class="btn btn-sm btn-outline-primary">Деталі</a>
+          <a href="{% url 'orders:add_to_cart' dish.pk %}" class="btn btn-sm btn-success">Додати</a>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <p>Немає страв.</p>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Оформлення замовлення</h2>
+<form method="post">{% csrf_token %}
+  <div class="mb-3">
+    <label>Адреса доставки</label>
+    <input type="text" name="address" class="form-control" value="{{ address }}">
+  </div>
+  <div class="mb-3">
+    <label>Спосіб оплати</label>
+    <select name="payment_method" class="form-select">
+      <option value="cash">Готівка при отриманні</option>
+      <option value="online">Онлайн</option>
+    </select>
+  </div>
+  <button class="btn btn-success">Підтвердити</button>
+</form>
+{% endblock %}

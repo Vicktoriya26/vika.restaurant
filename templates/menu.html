@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Меню{% endblock %}
+{% block content %}
+<h1>Меню</h1>
+<div class="row">
+    {% for dish in dishes %}
+    <div class="col-md-3">
+        <div class="card">
+            <img src="{{ dish.image.url }}" class="card-img-top">
+            <div class="card-body">
+                <h5>{{ dish.name }}</h5>
+                <p>{{ dish.price }} ₴</p>
+                <a href="{% url 'dish_detail' dish.id %}" class="btn btn-sm btn-info">Детальніше</a>
+                <a href="{% url 'add_to_cart' dish.id %}" class="btn btn-sm btn-success">Додати в кошик</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>Меню порожнє.</p>
+    {% endfor %}
+</div>
+{% endblock %}

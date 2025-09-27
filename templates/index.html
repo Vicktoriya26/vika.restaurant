@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Головна - Ресторан{% endblock %}
+{% block content %}
+<h1>Ласкаво просимо!</h1>
+
+<form method="get" action="{% url 'menu' %}" class="mb-3">
+    <input type="text" name="q" placeholder="Пошук по меню..." class="form-control">
+</form>
+
+<h2>Популярні страви</h2>
+<div class="row">
+    {% for dish in popular_dishes %}
+    <div class="col-md-3">
+        <div class="card">
+            <img src="{{ dish.image.url }}" class="card-img-top">
+            <div class="card-body">
+                <h5>{{ dish.name }}</h5>
+                <p>{{ dish.price }} ₴</p>
+                <a href="{% url 'dish_detail' dish.id %}" class="btn btn-primary">Детальніше</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
