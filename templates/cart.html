@@ -7,7 +7,7 @@
         <li class="list-group-item d-flex justify-content-between">
             {{ item.dish.name }} ({{ item.quantity }} шт.)
             <span>{{ item.total_price }} ₴</span>
-            <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger btn-sm">❌</a>
+            <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger btn-sm"></a>
         </li>
     {% empty %}
         <p>Кошик порожній</p>
