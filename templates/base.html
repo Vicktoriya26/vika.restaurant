@@ -13,12 +13,12 @@
       <ul class="navbar-nav ms-auto">
         {% if user.is_authenticated %}
           <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Профіль</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Вийти</a></li>
+          <li class="nav-item"><a class="nav-link" href=" ">Вийти</a></li>
         {% else %}
-          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Увійти</a></li>
+          <li class="nav-item"><a class="nav-link" href=" ">Увійти</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Реєстрація</a></li>
         {% endif %}
-        <li class="nav-item"><a class="nav-link" href="{% url 'cart' %}">🛒 Кошик</a></li>
+        <li class="nav-item"><a class="nav-link" href=" "> Кошик</a></li>
       </ul>
     </div>
   </div>
