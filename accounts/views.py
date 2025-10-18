@@ -13,7 +13,7 @@ def register(request):
             return redirect('menu:product_list')
     else:
         form = UserRegistrationForm()
-    return render(request, 'accounts/register.html', {'form': form})
+    return render(request, 'register.html', {'form': form})
 
 @login_required
 def profile(request):
@@ -24,5 +24,5 @@ def profile(request):
         request.user.address = request.POST.get('address', request.user.address)
         request.user.save()
         return redirect('profile')
-    return render(request, 'accounts/profile.html')
+    return render(request, 'profile.html')
 
