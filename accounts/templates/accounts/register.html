@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <title>Реєстрація</title>
-</head>
-<body>
-    <h2>Реєстрація користувача</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Зареєструватися</button>
-    </form>
-</body>
-</html>
+<h1>Реєстрація</h1>
+
+<form method="post" class="mt-3">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Зареєструватися</button>
+</form>

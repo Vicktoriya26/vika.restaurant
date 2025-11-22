@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Редагування профілю{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-3">Редагувати профіль</h2>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label>Email</label>
+      <input type="email" name="email" class="form-control" value="{{ user.email }}">
+    </div>
+
+    <div class="mb-3">
+      <label>Телефон</label>
+      <input type="text" name="phone" class="form-control" value="{{ user.phone }}">
+    </div>
+
+    <div class="mb-3">
+      <label>Адреса</label>
+      <input type="text" name="address" class="form-control" value="{{ user.address }}">
+    </div>
+
+    <button type="submit" class="btn btn-success">Зберегти</button>
+    <a href="{% url 'profile' %}" class="btn btn-secondary">Назад</a>
+  </form>
+
+</div>
+{% endblock %}

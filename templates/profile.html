@@ -4,15 +4,17 @@
 
 {% block content %}
 <div class="container mt-4">
-  <h2 class="mb-3"> Профіль користувача</h2>
+  <h2>Профіль користувача</h2>
+  <p><strong>Ім'я користувача:</strong> {{ user.username }}</p>
+  <p><strong>Email:</strong> {{ user.email }}</p>
+  <p><strong>Телефон:</strong> {{ user.phone }}</p>
+  <p><strong>Адреса:</strong> {{ user.address }}</p>
 
-  <div class="card">
-    <div class="card-body">
-      <p><strong>Ім'я користувача:</strong> {{ user.username }}</p>
-      <p><strong>Email:</strong> {{ user.email }}</p>
+  <a href="{% url 'profile_edit' %}" class="btn btn-primary">Редагувати профіль</a>
 
-      <a href="#" class="btn btn-primary btn-sm">Редагувати профіль</a>
-    </div>
-  </div>
+  <form action="{% url 'logout' %}" method="post" style="display:inline-block;">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Вийти</button>
+  </form>
 </div>
 {% endblock %}
