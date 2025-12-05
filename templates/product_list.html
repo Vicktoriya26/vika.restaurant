@@ -5,7 +5,6 @@
 <div class="container mt-4">
   <h2 class="mb-4 text-center"> Меню ресторану</h2>
 
-  
   <form method="get" action="{% url 'menu:product_list' %}" class="d-flex justify-content-center mb-5">
     <div class="input-group" style="max-width: 400px;">
       <input type="text" name="q" value="{{ query }}" class="form-control" placeholder="Пошук страви...">
@@ -28,7 +27,14 @@
               <h5 class="card-title">{{ dish.name }}</h5>
               <p class="card-text text-muted">{{ dish.description|truncatechars:80 }}</p>
               <p><strong>{{ dish.price }} ₴</strong></p>
+
               <a href="{% url 'menu:product_detail' dish.pk %}" class="btn btn-sm btn-primary">Деталі</a>
+
+              <!-- 🟢 ДОДАТИ В КОШИК -->
+              <a href="{% url 'cart:cart_add' dish.id %}" class="btn btn-sm btn-success mt-2">
+                Додати в кошик
+              </a>
+
             </div>
           </div>
         </div>
@@ -38,7 +44,7 @@
     </div>
 
   {% else %}
-    
+
     {% for category in categories %}
       <h4 class="mt-4">{{ category.name }}</h4>
       <div class="row">
@@ -52,7 +58,14 @@
                 <h5 class="card-title">{{ dish.name }}</h5>
                 <p class="card-text text-muted">{{ dish.description|truncatechars:80 }}</p>
                 <p><strong>{{ dish.price }} ₴</strong></p>
+
                 <a href="{% url 'menu:product_detail' dish.pk %}" class="btn btn-sm btn-primary">Деталі</a>
+
+                <!-- 🟢 ДОДАТИ В КОШИК -->
+                <a href="{% url 'cart:cart_add' dish.id %}" class="btn btn-sm btn-success mt-2">
+                  Додати в кошик
+                </a>
+
               </div>
             </div>
           </div>
