@@ -1,49 +1,31 @@
-{% extends "base.html" %}
-{% load static %}
+<h2>Кошик</h2>
 
-{% block content %}
-<div class="container mt-4">
-  <h2 class="mb-4">Кошик</h2>
+{% if cart %}
+<table>
+    <tr>
+        <th>Страва</th>
+        <th>Ціна</th>
+        <th>Кількість</th>
+        <th>Сума</th>
+        <th></th>
+    </tr>
 
-  {% if cart %}
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Страва</th>
-          <th>Ціна</th>
-          <th>Кількість</th>
-          <th>Разом</th>
-          <th>Дії</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for item in cart %}
-        <tr>
-          <td>{{ item.product.name }}</td>
-          <td>{{ item.product.price }} ₴</td>
-          <td>
-            <form action="{% url 'cart:cart_update' item.product.id %}" method="post" class="d-flex">
-              {% csrf_token %}
-              <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control" style="width: 80px;">
-              <button class="btn btn-sm btn-success ms-2" type="submit">Оновити</button>
-            </form>
-          </td>
-          <td>{{ item.total_price }} ₴</td>
-          <td>
-            <a href="{% url 'cart:cart_remove' item.product.id %}" class="btn btn-danger btn-sm">Видалити</a>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    {% for item in cart %}
+    <tr>
+        <td>{{ item.dish.name }}</td>
+        <td>{{ item.price }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.total_price }}</td>
+        <td>
+            <a href="{% url 'cart:remove' item.dish.id %}">Видалити</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
 
-    <div class="d-flex justify-content-between align-items-center mt-3">
-      <h4>Загальна сума: <strong>{{ cart.get_total_price }} ₴</strong></h4>
-      <a href="{% url 'cart:cart_clear' %}" class="btn btn-danger">Очистити кошик</a>
-    </div>
+<h3>Загальна сума: {{ cart.get_total_price }}</h3>
+<a href="{% url 'cart:clear' %}">Очистити кошик</a>
 
-  {% else %}
-    <p>Кошик порожній.</p>
-  {% endif %}
-</div>
-{% endblock %}
+{% else %}
+<p>Кошик порожній</p>
+{% endif %}

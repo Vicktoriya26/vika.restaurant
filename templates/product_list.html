@@ -3,8 +3,9 @@
 {% block content %}
 
 <div class="container mt-4">
-  <h2 class="mb-4 text-center"> Меню ресторану</h2>
+  <h2 class="mb-4 text-center">Меню ресторану</h2>
 
+  <!-- Пошук страви -->
   <form method="get" action="{% url 'menu:product_list' %}" class="d-flex justify-content-center mb-5">
     <div class="input-group" style="max-width: 400px;">
       <input type="text" name="q" value="{{ query }}" class="form-control" placeholder="Пошук страви...">
@@ -28,18 +29,14 @@
               <p class="card-text text-muted">{{ dish.description|truncatechars:80 }}</p>
               <p><strong>{{ dish.price }} ₴</strong></p>
 
-              <a href="{% url 'menu:product_detail' dish.pk %}" class="btn btn-sm btn-primary">Деталі</a>
-
-              <!-- 🟢 ДОДАТИ В КОШИК -->
-              <a href="{% url 'cart:cart_add' dish.id %}" class="btn btn-sm btn-success mt-2">
-                Додати в кошик
-              </a>
-
+              <!-- Кнопки Chocolate -->
+              <a href="{% url 'menu:product_detail' dish.pk %}" class="btn-Chocolate">Деталі</a>
+              <a href="{% url 'cart:add' dish.id %}" class="btn-Chocolate mt-2">Додати в кошик</a>
             </div>
           </div>
         </div>
       {% empty %}
-        <p class="text-center text-muted">Нічого не знайдено </p>
+        <p class="text-center text-muted">Нічого не знайдено</p>
       {% endfor %}
     </div>
 
@@ -59,13 +56,9 @@
                 <p class="card-text text-muted">{{ dish.description|truncatechars:80 }}</p>
                 <p><strong>{{ dish.price }} ₴</strong></p>
 
-                <a href="{% url 'menu:product_detail' dish.pk %}" class="btn btn-sm btn-primary">Деталі</a>
-
-                <!-- 🟢 ДОДАТИ В КОШИК -->
-                <a href="{% url 'cart:cart_add' dish.id %}" class="btn btn-sm btn-success mt-2">
-                  Додати в кошик
-                </a>
-
+                <!-- Кнопки Chocolate -->
+                <a href="{% url 'menu:product_detail' dish.pk %}" class="btn-Chocolate">Деталі</a>
+                <a href="{% url 'cart:add' dish.id %}" class="btn-Chocolate mt-2">Додати в кошик</a>
               </div>
             </div>
           </div>
