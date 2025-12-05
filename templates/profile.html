@@ -10,8 +10,8 @@
     <div class="card-body">
       <p><strong>Ім'я користувача:</strong> {{ user.username }}</p>
       <p><strong>Email:</strong> {{ user.email }}</p>
-
-      <a href="#" class="btn btn-primary btn-sm">Редагувати профіль</a>
+      <a href="{% url 'profile_edit' %}" class="btn btn-primary btn-sm">Редагувати профіль</a>
+      <a href="{% url 'password_change' %}" class="btn btn-secondary btn-sm">Змінити пароль</a>
     </div>
   </div>
 </div>

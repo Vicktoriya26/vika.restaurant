@@ -1,0 +1,15 @@
+<h1>Редагувати профіль</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <label>Email:</label>
+    <input type="email" name="email" value="{{ user.email }}"><br>
+
+    <label>Телефон:</label>
+    <input type="text" name="phone" value="{{ user.phone }}"><br>
+
+    <label>Адреса:</label>
+    <input type="text" name="address" value="{{ user.address }}"><br>
+
+    <button type="submit">Зберегти</button>
+</form>
