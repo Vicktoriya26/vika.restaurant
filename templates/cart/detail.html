@@ -1,3 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Кошик{% endblock %}
+{% block content %}
+
+
 <h2>Кошик</h2>
 
 {% if cart %}
@@ -17,15 +22,17 @@
         <td>{{ item.quantity }}</td>
         <td>{{ item.total_price }}</td>
         <td>
-            <a href="{% url 'cart:remove' item.dish.id %}">Видалити</a>
+            <a href="{% url 'cart:remove' item.dish.id %}" class="btn btn-outline-danger">Видалити</a>
         </td>
     </tr>
     {% endfor %}
 </table>
 
 <h3>Загальна сума: {{ cart.get_total_price }}</h3>
-<a href="{% url 'cart:clear' %}">Очистити кошик</a>
-
+<a href="{% url 'cart:clear' %}" class="btn btn-primary">Очистити кошик</a>
+<a href="{% url 'orders:checkout' %}" class="btn btn-primary">Оформити замовлення</a>
 {% else %}
 <p>Кошик порожній</p>
 {% endif %}
+{% endblock %}
+
