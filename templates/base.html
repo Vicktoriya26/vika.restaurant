@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Viktoriya_Restaursnt{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        body {
+            background-color: #f5f0e1; /* світлий бежевий фон */
+        }
+        .btn-Chocolate {
+            background-color: #58411a !important; /* молочний шоколад */
+            color: white !important;
+            border: 2px solid #58411a; /* коричнева обводка */
+            border-radius: 5px;
+            padding: 5px 15px;
+            margin-right: 5px;
+            display: inline-block !important;
+            text-decoration: none !important;
+            cursor: pointer !important;
+        }
+        .btn-Chocolate:hover {
+            background-color: #58411a !important; /* темніший шоколад при наведенні */
+            border-color: #58411a;
+            color: white !important;
+        }
+        .navbar {
+            background-color: #705830 !important; /* темно-бежевий */
+        }
+
+        .navbar .navbar-brand,
+        .navbar .nav-link,
+        .navbar .btn-Chocolate {
+            color: white !important; /* текст білого кольору на панелі */
+        }
+
+        .navbar .nav-link:hover {
+            color: #fff3e0 !important; /* світліший колір при наведенні */
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <!-- Логотип і назва ресторану ведуть на головну сторінку меню -->
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'menu:product_list' %}">
+            <img src="https://cdn-icons-png.flaticon.com/512/562/562678.png" 
+                 alt="Логотип ресторану" width="40" height="40" class="d-inline-block align-text-top me-2">
+            Vika_restaurant
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <!-- Кнопка кошика -->
+                <li class="nav-item">
+                    <a class="btn btn-Chocolate position-relative" href="{% url 'cart:detail' %}">
+                        <i class="bi bi-cart"></i>
+                        {% if cart|length > 0 %}
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ cart|length }}
+                            </span>
+                        {% endif %}
+                    </a>
+                </li>
+
+                {% if user.is_authenticated %}
+                    <!-- Кнопки для авторизованих -->
+                    <li class="nav-item">
+                        <a class="btn btn-Chocolate me-2 text-primary" href="{% url 'profile' %}">Профіль</a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center">
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-Chocolate me-2 text-primary"
+                                    style="padding:0; border:none; background:none;">Вийти</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <!-- Кнопки для гостей -->
+                    <li class="nav-item">
+                        <a class="btn btn-Chocolate me-2 text-primary" href="{% url 'login' %}">Увійти</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-Chocolate me-2 text-primary" href="{% url 'register' %}">Реєстрація</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+function openCart() {
+    fetch("{% url 'cart:detail' %}")
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById("cart-modal-body").innerHTML = html;
+            new bootstrap.Modal(document.getElementById('cartModal')).show();
+        });
+}
+</script>
+</body>
+</html>
