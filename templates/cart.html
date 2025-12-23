@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Кошик{% endblock %}
+{% block content %}
+<h1>Ваш кошик</h1>
+<ul class="list-group">
+    {% for item in cart_items %}
+        <li class="list-group-item d-flex justify-content-between">
+            {{ item.dish.name }} ({{ item.quantity }} шт.)
+            <span>{{ item.total_price }} ₴</span>
+            <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger btn-sm"></a>
+        </li>
+    {% empty %}
+        <p>Кошик порожній</p>
+    {% endfor %}
+</ul>
+<hr>
+<p><b>Загалом:</b> {{ total_price }} ₴</p>
+<a href="{% url 'orders:checkout' %}" class="btn btn-primary">Оформити замовлення</a>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+  <div class="col-md-6">
+    {% if dish.image %}
+      <img src="{{ dish.image.url }}" class="img-fluid" alt="{{ dish.name }}">
+    {% endif %}
+  </div>
+  <div class="col-md-6">
+    <h2>{{ dish.name }}</h2>
+    <p>{{ dish.description }}</p>
+    <p><strong>Інгредієнти:</strong> {{ dish.ingredients }}</p>
+    <p><strong>Ціна:</strong> {{ dish.price }} ₴</p>
+    {% if dish.available %}
+      <a href="{% url 'cart:add' dish.pk %}" class="btn btn-success">Додати в кошик</a>
+    {% else %}
+      <button class="btn btn-secondary" disabled>Немає в наявності</button>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

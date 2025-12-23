@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-4">
+  <h2 class="mb-4 text-center">Меню ресторану</h2>
+
+  <!-- Пошук страви -->
+  <form method="get" action="{% url 'menu:product_list' %}" class="d-flex justify-content-center mb-5">
+    <div class="input-group" style="max-width: 400px;">
+      <input type="text" name="q" value="{{ query }}" class="form-control" placeholder="Пошук страви...">
+      <button class="btn btn-outline-secondary" type="submit">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </form>
+
+  {% if query %}
+    <h5 class="text-center mb-4">Результати для: <em>{{ query }}</em></h5>
+    <div class="row">
+      {% for dish in dishes %}
+        <div class="col-md-4 mb-3">
+          <div class="card shadow-sm">
+            {% if dish.image %}
+              <img src="{{ dish.image.url }}" class="card-img-top" alt="{{ dish.name }}">
+            {% endif %}
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ dish.name }}</h5>
+              <p class="card-text text-muted">{{ dish.description|truncatechars:80 }}</p>
+              <p><strong>{{ dish.price }} ₴</strong></p>
+
+              <!-- Кнопки Chocolate -->
+              <a href="{% url 'menu:product_detail' dish.pk %}" class="btn-Chocolate">Деталі</a>
+              <a href="{% url 'cart:add' dish.id %}" class="btn-Chocolate mt-2">Додати в кошик</a>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <p class="text-center text-muted">Нічого не знайдено</p>
+      {% endfor %}
+    </div>
+
+  {% else %}
+
+    {% for category in categories %}
+      <h4 class="mt-4">{{ category.name }}</h4>
+      <div class="row">
+        {% for dish in category.dishes.all %}
+          <div class="col-md-4 mb-3">
+            <div class="card shadow-sm">
+              {% if dish.image %}
+                <img src="{{ dish.image.url }}" class="card-img-top" alt="{{ dish.name }}">
+              {% endif %}
+              <div class="card-body text-center">
+                <h5 class="card-title">{{ dish.name }}</h5>
+                <p class="card-text text-muted">{{ dish.description|truncatechars:80 }}</p>
+                <p><strong>{{ dish.price }} ₴</strong></p>
+
+                <!-- Кнопки Chocolate -->
+                <a href="{% url 'menu:product_detail' dish.pk %}" class="btn-Chocolate">Деталі</a>
+                <a href="{% url 'cart:add' dish.id %}" class="btn-Chocolate mt-2">Додати в кошик</a>
+              </div>
+            </div>
+          </div>
+        {% empty %}
+          <p>Немає страв у цій категорії.</p>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+
+{% endblock %}
