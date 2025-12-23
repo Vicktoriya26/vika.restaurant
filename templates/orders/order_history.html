@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+  <h2>Історія ваших замовлень</h2>
+
+  {% for order in orders %}
+    <div class="card mt-3">
+      <div class="card-body">
+        <h5>Замовлення №{{ order.id }} ({{ order.created_at|date:"d.m.Y H:i" }})</h5>
+
+        <p><strong>Сума:</strong> {{ order.total_price }} грн</p>
+
+        <h6>Товари:</h6>
+        <ul>
+          {% for item in order.items.all %}
+            <li>{{ item.product_name }} — {{ item.quantity }} шт × {{ item.price }} грн</li>
+          {% endfor %}
+        </ul>
+
+        <a href="{% url 'repeat_order' order.id %}" class="btn btn-sm btn-primary">
+          Повторити замовлення
+        </a>
+      </div>
+    </div>
+  {% empty %}
+    <p>У вас ще немає замовлень.</p>
+  {% endfor %}
+</div>
+
+{% endblock %}

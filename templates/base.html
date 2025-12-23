@@ -72,6 +72,9 @@
 
                 {% if user.is_authenticated %}
                     <!-- Кнопки для авторизованих -->
+                     <li class="nav-item">
+                        <a class="btn btn-Chocolate me-2 text-primary" href="{% url 'orders:order_history' %}">Історія замовлень</a>
+                    </li>
                     <li class="nav-item">
                         <a class="btn btn-Chocolate me-2 text-primary" href="{% url 'profile' %}">Профіль</a>
                     </li>

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="mb-3">Оформлення замовлення</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <h4>Контактна інформація</h4>
+        <div class="mb-3">
+            <label class="form-label">Ім'я</label>
+            <input type="text" name="name" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Номер телефону</label>
+            <input type="text" name="phone" class="form-control" required>
+        </div>
+
+        <h4 class="mt-4">Адреса доставки</h4>
+        <div class="mb-3">
+            <label class="form-label">Місто</label>
+            <input type="text" name="city" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Вулиця, будинок, квартира</label>
+            <input type="text" name="address" class="form-control" required>
+        </div>
+
+        <h4 class="mt-4">Спосіб оплати</h4>
+        <div class="mb-3">
+            <select name="payment_method" class="form-select" required>
+                <option value="cash">Готівка при отриманні</option>
+                <option value="online">Онлайн оплата</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Підтвердити замовлення</button>
+    </form>
+</div>
+
+{% endblock %}
